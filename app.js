@@ -1,11 +1,18 @@
 //VARIABLES
 const quote = document.querySelector(".quote-text");
 const searchBtn = document.querySelector("#search");
-// const author = document.querySelector(".author")
+const author = document.querySelector(".author");
+const image = document.querySelector(".card-img");
+const imageButton = document.querySelector("#imageButton");
+// variables to access dataArray
+
+
 
 
 //EVENT LISTENERS
-searchBtn.addEventListener("click",getQuote)
+searchBtn.addEventListener("click",getQuote);
+imageButton.addEventListener("click",getImage);
+
 
 
 //FUNCTIONS
@@ -14,18 +21,40 @@ function getQuote(){
       fetch("https://api.quotable.io/quotes")
       .then(res => res.json())
       .then(data => {
-          const results = data.results[0];
-          quote.innerHTML = `"${results.content}"`;
-          console.log(data);
-          console.log(results.content);
-         // author.innerHTML = data.author;
+        const quotesArray = data.results;
+        quotesArray.forEach(individualQuote => {
+            let randomNumber = Math.floor(Math.random()*quotesArray.length)
+            quote.innerHTML = `"${quotesArray[randomNumber].content}"`
+            author.innerHTML = `"${quotesArray[randomNumber].author}"`
+            });
+        console.log(data)
       });
     } catch (error) {
         console.log(error);
     }
 }
 
-Math.floor(Math.random()*deck.length);
+
+
+//https://picsum.photos/v2/list
+//another function to do the same thing for the image
+function getImage(){
+  try {
+      fetch("https://picsum.photos/v2/list")
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        data.forEach(individualimage => {
+            let randomNumber = Math.floor(Math.random()*data.length)
+            image.setAttribute("src",`${data[randomNumber].url}`)
+        })
+      })
+    } catch (error) {
+      console.log(error);
+  }
+}
+
+
 
 
 
@@ -53,10 +82,4 @@ Math.floor(Math.random()*deck.length);
 //               </div>
 //             </div>
 //     `
-// }
-
-
-
-
-
-// https://api.quotable.io/quotes
+// 
