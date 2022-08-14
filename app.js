@@ -1,6 +1,6 @@
 //VARIABLES
 const quote = document.querySelector(".quote-text");
-const searchBtn = document.querySelector("#search");
+const randomButton = document.querySelector("#randomButton");
 const author = document.querySelector(".author");
 const image = document.querySelector(".card-img");
 const imageButton = document.querySelector("#imageButton");
@@ -10,7 +10,7 @@ const imageButton = document.querySelector("#imageButton");
 
 
 //EVENT LISTENERS
-searchBtn.addEventListener("click",getQuote);
+randomButton.addEventListener("click",getQuote);
 imageButton.addEventListener("click",getImage);
 
 
