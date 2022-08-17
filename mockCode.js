@@ -17,12 +17,15 @@ function FavList(event){
       .then(res => res.json())
       .then(data => {
         const quotesArray = data.results;
+        const returnVar = quotesArray[randomNumber].content
         quotesArray.forEach(individualQuote => {
             let randomNumber = Math.floor(Math.random()*quotesArray.length)
             quote.innerHTML = `"${quotesArray[randomNumber].content}"`
+            return 
             author.innerHTML = `"${quotesArray[randomNumber].author}"`
             });
         console.log(data)
+        return returnVar;
       });
     } catch (error) {
         console.log(error);
