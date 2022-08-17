@@ -4,18 +4,24 @@ const randomButton = document.querySelector("#randomButton");
 const author = document.querySelector(".author");
 const image = document.querySelector(".card-img");
 const imageButton = document.querySelector("#imageButton");
+const quoteButton = document.querySelector("#quoteButton");
 // variables to access dataArray
 
 
 
 
 //EVENT LISTENERS
-randomButton.addEventListener("click",getQuote);
+randomButton.addEventListener("click",getRandom);
 imageButton.addEventListener("click",getImage);
+quoteButton.addEventListener("click",getQuote);
+
+
+
 
 
 
 //FUNCTIONS
+//still need to get all the quotes and not just the first page
 function getQuote(){
     try {
       fetch("https://api.quotable.io/quotes")
@@ -34,10 +40,7 @@ function getQuote(){
     }
 }
 
-
-
-//https://picsum.photos/v2/list
-//another function to do the same thing for the image
+//still need to get all the images and not just the first page
 function getImage(){
   try {
       fetch("https://picsum.photos/v2/list")
@@ -46,40 +49,15 @@ function getImage(){
         console.log(data);
         data.forEach(individualimage => {
             let randomNumber = Math.floor(Math.random()*data.length)
-            image.setAttribute("src",`${data[randomNumber].url}`)
+            image.setAttribute("src",`${data[randomNumber].download_url}`)
         })
       })
     } catch (error) {
       console.log(error);
   }
 }
+function getRandom(){
+  getQuote();
+  getImage();
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-// function getImage(){
-    
-//}
-
-// function renderImage (){
-    
-//     `<div class="col-sm-6">
-//             <div class="card bg-dark text-white">
-//                 <img src="bao-bun.jpg" class="card-img" alt="...">
-//                 <div class="card-img-overlay">
-//                   <p class="quote-text">${data.content}</p>
-//                   <p class="author">${data.author}</p>
-//                 </div>
-//               </div>
-//             </div>
-//     `
-// 
