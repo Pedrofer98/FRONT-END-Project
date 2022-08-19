@@ -81,5 +81,7 @@ function getImage(){
 function getRandom(){
   getQuote();
   getImage();
+  console.log(quoteHistory);
+  console.log(imagehistory);
 }
 
