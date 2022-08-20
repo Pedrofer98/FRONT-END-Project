@@ -1,7 +1,7 @@
 .body{
-  background-color: orangered;
-  padding:10px;
-  margin:0px;
+  background-color: orange;
+  padding:20px;
+  
 
 }
 
@@ -15,6 +15,13 @@
     
 }
 
+.footer{
+  display: flex;
+  justify-content: center;
+  background: orange;
+  padding: 20px;
+
+}
 
 .fa {
     padding: 20px;
