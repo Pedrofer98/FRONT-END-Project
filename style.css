@@ -11,8 +11,11 @@
 }
 
 .col-2{
-    background: white;
+    background: green;
     
+}
+.form-select{
+  background: green;
 }
 
 .footer{
