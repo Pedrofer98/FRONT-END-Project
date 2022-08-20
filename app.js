@@ -26,32 +26,43 @@ quoteButton.addEventListener("click",getQuote);
 //FUNCTIONS
 
 function getQuote(){
-  
-  try {
-    fetch("https://api.quotable.io/quotes")
-    .then(res => res.json())
-    .then(data => {
-      const quotesArray = data.results;
-       
-          let randomNumber = Math.floor(Math.random()*quotesArray.length)
-          let randomQuote = quotesArray[randomNumber].content;
-          let randomAuthor = quotesArray[randomNumber].author
-          quote.innerHTML = `"${randomQuote}"`;
-          author.innerHTML = `"${randomAuthor}"`;
-          let actualQuote = quote.innerHTML // one option for "saving" the output.
-          // console.log(actualQuote);
-          quoteHistory.push({author: randomAuthor, quote: randomQuote});
+    try {
+      fetch("https://api.quotable.io/quotes?page=103")
+      .then(res => res.json())
+      .then(data => {
+        let newQuotesArray = []
+        for (i = 0; i <= data.totalPages; i++) {
+          newQuotesArray.push(...data.results)
+        }
 
-    });
-    console.log(quoteHistory);
-    // let actualQuote = quote.innerHTML;
-    //   let actualAuthor = author.innerHTML;
-    //   console.log(actualAuthor);
-    //   console.log(actualQuote);
-  } catch (error) {
-      console.log(error);
-  }
+
+        // Pedro's Changes
+        const quotesArray = data.results;
+        let randomNumber = Math.floor(Math.random()*quotesArray.length)
+        let randomQuote = quotesArray[randomNumber].content;
+        let randomAuthor = quotesArray[randomNumber].author
+        quote.innerHTML = `"${randomQuote}"`;
+        author.innerHTML = `"${randomAuthor}"`;
+        let actualQuote = quote.innerHTML // one option for "saving" the output.
+        // console.log(actualQuote);
+        quoteHistory.push({author: randomAuthor, quote: randomQuote});
+
+        
+        return newQuotesArray
+      })
+      .then((newQuotesArray) => {
+          renderQuote(newQuotesArray)
+    })
+      } catch (error) {
+        console.log(error);
+    }
 }
+
+function renderQuote (array){
+    let randomNumber = Math.floor(Math.random()*array.length)
+    quote.innerHTML = `"${array[randomNumber].content}"`
+    author.innerHTML = `"${array[randomNumber].author}"`
+  }
 
 
 //still need to get all the images and not just the first page
@@ -70,6 +81,17 @@ function getImage(){
             image.setAttribute("src",`${randomImage}`);
             imagehistory.push(randomImage);
 
+
+
+            // Dave's commented code
+            // let imagesArray = []
+            // for (i = 0; i <= data.totalPages; i++) {
+            //   imagesArray.push(...data.results)
+            // }
+            // return newQuotesArray
+            //     let randomNumber = Math.floor(Math.random()*data.length)
+            //     image.setAttribute("src",`${data[randomNumber].download_url}`)
+
         })
 
       // })
@@ -78,6 +100,12 @@ function getImage(){
   }
   console.log(imagehistory);
 }
+
+function renderImage(){
+  let randomNumber = Math.floor(Math.random()*data.length)
+  image.setAttribute("src",`${data[randomNumber].download_url}`)
+}
+
 function getRandom(){
   getQuote();
   getImage();
