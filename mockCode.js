@@ -17,12 +17,22 @@ function FavList(event){
       .then(res => res.json())
       .then(data => {
         const quotesArray = data.results;
+        let returnArray =[] // where i will push the quotes generated with my fucntion. this array will be the "history"
+        const returnVar = quotesArray[randomNumber].content
+
         quotesArray.forEach(individualQuote => {
             let randomNumber = Math.floor(Math.random()*quotesArray.length)
             quote.innerHTML = `"${quotesArray[randomNumber].content}"`
+            let actualQuote = quote.innerHTML // one option for "saving" the output.
+            console.log('actualQuote');
+            returnArray.push('actualQuote');
+            
             author.innerHTML = `"${quotesArray[randomNumber].author}"`
+
             });
+
         console.log(data)
+        return returnVar;
       });
     } catch (error) {
         console.log(error);

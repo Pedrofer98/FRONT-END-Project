@@ -5,6 +5,9 @@ const author = document.querySelector(".author");
 const image = document.querySelector(".card-img");
 const imageButton = document.querySelector("#imageButton");
 const quoteButton = document.querySelector("#quoteButton");
+let actualQuote = quote.innerHTML;
+let quoteHistory =[];
+let imagehistory =[];
 // variables to access dataArray
 
 
@@ -21,7 +24,7 @@ quoteButton.addEventListener("click",getQuote);
 
 
 //FUNCTIONS
-//still need to get all the quotes and not just the first page
+
 function getQuote(){
     try {
       fetch("https://api.quotable.io/quotes?page=103")
@@ -31,6 +34,20 @@ function getQuote(){
         for (i = 0; i <= data.totalPages; i++) {
           newQuotesArray.push(...data.results)
         }
+
+
+        // Pedro's Changes
+        const quotesArray = data.results;
+        let randomNumber = Math.floor(Math.random()*quotesArray.length)
+        let randomQuote = quotesArray[randomNumber].content;
+        let randomAuthor = quotesArray[randomNumber].author
+        quote.innerHTML = `"${randomQuote}"`;
+        author.innerHTML = `"${randomAuthor}"`;
+        let actualQuote = quote.innerHTML // one option for "saving" the output.
+        // console.log(actualQuote);
+        quoteHistory.push({author: randomAuthor, quote: randomQuote});
+
+        
         return newQuotesArray
       })
       .then((newQuotesArray) => {
@@ -54,18 +71,34 @@ function getImage(){
       fetch("https://picsum.photos/v2/list")
       .then(res => res.json())
       .then(data => {
-        console.log(data)
-        // let imagesArray = []
-        // for (i = 0; i <= data.totalPages; i++) {
-        //   imagesArray.push(...data.results)
-        // }
-        // return newQuotesArray
-        //     let randomNumber = Math.floor(Math.random()*data.length)
-        //     image.setAttribute("src",`${data[randomNumber].download_url}`)
+
+        console.log(data);
+        // data.forEach(individualimage => {
+
+            let randomNumber = Math.floor(Math.random()*data.length)
+            let randomImage = data[randomNumber].download_url;
+            console.log(randomImage);
+            image.setAttribute("src",`${randomImage}`);
+            imagehistory.push(randomImage);
+
+
+
+            // Dave's commented code
+            // let imagesArray = []
+            // for (i = 0; i <= data.totalPages; i++) {
+            //   imagesArray.push(...data.results)
+            // }
+            // return newQuotesArray
+            //     let randomNumber = Math.floor(Math.random()*data.length)
+            //     image.setAttribute("src",`${data[randomNumber].download_url}`)
+
         })
-      } catch (error) {
+
+      // })
+    } catch (error) {
       console.log(error);
   }
+  console.log(imagehistory);
 }
 
 function renderImage(){
@@ -76,5 +109,7 @@ function renderImage(){
 function getRandom(){
   getQuote();
   getImage();
+  console.log(quoteHistory);
+  console.log(imagehistory);
 }
 
