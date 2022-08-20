@@ -1,9 +1,29 @@
-.container{
-    background-color: grey;
+.body{
+  background-color: orange;
+  padding:20px;
+  
+
 }
 
-.button{
-    background-color: blue;
+.container{
+    background-color: orange;
+    padding: 20px;
+}
+
+.col-2{
+    background: green;
+    
+}
+.form-select{
+  background: green;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  background: orange;
+  padding: 20px;
+
 }
 
 .fa {
@@ -12,7 +32,7 @@
     width: 50px;
     text-align: center;
     text-decoration: none;
-    margin: 5px 2px;
+    margin: 3px 1px;
   }
   
   .fa:hover {
