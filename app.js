@@ -5,14 +5,18 @@ const author = document.querySelector(".author");
 const image = document.querySelector(".card-img");
 const imageButton = document.querySelector("#imageButton");
 const quoteButton = document.querySelector("#quoteButton");
-let quoteHistory =[];
+let quoteHistory = [];
 let newQuotesArray = [];
+let imagesArray = [];
+let imagehistory =[];
 
 //EVENT LISTENERS
-randomButton.addEventListener("click",getRandom);
-imageButton.addEventListener("click",getImage);
-quoteButton.addEventListener('click', renderQuote)
 window.addEventListener("load", getQuote);
+window.addEventListener("load", getImage);
+randomButton.addEventListener("click",getRandom);
+imageButton.addEventListener("click",renderImage);
+quoteButton.addEventListener('click', renderQuote)
+
 
 
 //FUNCTIONS
@@ -21,11 +25,13 @@ function getQuote(){
     fetch("https://api.quotable.io/quotes")
     .then(res => res.json())
     .then(data => {
+      //pagination isn't fixed, i thought it was w/ this but it's not, 
+      //it's just pushing the same initial set over and over
       for (i = 0; i <= data.totalPages; i++) {
         newQuotesArray.push(...data.results)
       }
     })
-    } catch (error) {
+  }catch (error) {
       console.log(error);
   }
 }
@@ -40,54 +46,31 @@ function renderQuote (){
     quoteHistory.push({author: randomAuthor, quote: randomQuote});
   }
 
-// function renderHistory(){
-//     let randomNumber = Math.floor(Math.random()*newQuotesArray.length)
-//     let randomQuote = newQuotesArray[randomNumber].content;
-//     let randomAuthor = newQuotesArray[randomNumber].author;
-//     let actualQuote = quote.innerHTML // one option for "saving" the output.
-//     // console.log(actualQuote);
-//     quoteHistory.push({author: randomAuthor, quote: randomQuote});
-// }
 
 
-//still need to fix pagination and separate out the fetch portion
+//still need to fix pagination
 function getImage(){
   try {
-      fetch(`https://picsum.photos/v2/list?limit=${newQuotesArray.length}`)
+      fetch(`https://picsum.photos/v2/list?limit=100`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
-        //there are likely a ton of pages to this API, travis' recommendation is to pull at least as many
-        //photos as there are quotes, loop through in a similar fashion to getQuote and use newQuotesArray.length
-        let imagehistory =[];
-        let randomNumber = Math.floor(Math.random()*data.length);
-        let randomImage = data[randomNumber].download_url;
-        image.setAttribute("src",`${randomImage}`);
-        imagehistory.push(randomImage);
-        console.log(imagehistory);
-      })
-            // Dave's commented code
-            // let imagesArray = []
-            // for (i = 0; i <= data.totalPages; i++) {
-            //   imagesArray.push(...data.results)
-            // }
-            // return newQuotesArray
-            //     let randomNumber = Math.floor(Math.random()*data.length)
-            //     image.setAttribute("src",`${data[randomNumber].download_url}`)
-      // })
-    } catch (error) {
+        imagesArray.push(...data);
+    }) 
+  }catch (error) {
       console.log(error);
   }
 }
 
-//need to do the same thing w/ image function
+
 function renderImage(){
-  let randomNumber = Math.floor(Math.random()*data.length)
-  image.setAttribute("src",`${data[randomNumber].download_url}`)
+  let randomNumber = Math.floor(Math.random()*imagesArray.length)
+  let randomImage = imagesArray[randomNumber].download_url;
+  image.setAttribute("src",`${randomImage}`);
+  imagehistory.push(randomImage);
 }
 
 function getRandom(){
   renderQuote();
-  getImage();
+  renderImage();
 }
 

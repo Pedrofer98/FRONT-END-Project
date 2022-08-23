@@ -76,12 +76,6 @@
    
 
 
-//OPTIMIZE GETQUOTE AND GETIMAGE FUNCTIONS, FETCH DATA ONLOAD, RETURN DATA AND THEN 
-//HIT IT WITH GETQUOTE AND GETIMAGE FUNCTIONS
-//add the window listener
-window.addEventListener("load", getQuote);
-//remember to change quote button function call
-quoteButton.addEventListener('click', renderQuote(newQuotesArray))
 
 function getQuote(){
   try {
