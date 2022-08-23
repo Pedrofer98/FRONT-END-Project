@@ -1,7 +1,7 @@
 .body{
-  background-color: orangered;
-  padding:10px;
-  margin:0px;
+  background-color: orange;
+  padding:20px;
+  
 
 }
 
@@ -11,10 +11,20 @@
 }
 
 .col-2{
-    background: white;
+    background: green;
     
 }
+.form-select{
+  background: green;
+}
 
+.footer{
+  display: flex;
+  justify-content: center;
+  background: orange;
+  padding: 20px;
+
+}
 
 .fa {
     padding: 20px;
