@@ -27,7 +27,7 @@ quoteButton.addEventListener("click",getQuote);
 
 function getQuote(){
     try {
-      fetch("https://api.quotable.io/quotes?page=103")
+      fetch("https://api.quotable.io/quotes")
       .then(res => res.json())
       .then(data => {
         let newQuotesArray = []
@@ -46,6 +46,7 @@ function getQuote(){
         let actualQuote = quote.innerHTML // one option for "saving" the output.
         // console.log(actualQuote);
         quoteHistory.push({author: randomAuthor, quote: randomQuote});
+        console.log(quoteHistory);
 
         
         return newQuotesArray
@@ -72,7 +73,7 @@ function getImage(){
       .then(res => res.json())
       .then(data => {
 
-        console.log(data);
+        // console.log(data);
         // data.forEach(individualimage => {
 
             let randomNumber = Math.floor(Math.random()*data.length)
@@ -112,4 +113,6 @@ function getRandom(){
   console.log(quoteHistory);
   console.log(imagehistory);
 }
+
+
 
