@@ -30,37 +30,38 @@ if (dropdown)
 //FUNCTIONS
 
 //kelly changes
-function fillDropdown() {
-  fetch("https://api.quotable.io/quotes")
+// function fillDropdown() {
+//   fetch("https://api.quotable.io/quotes")
+//     .then((res) => res.json())
+//     .then((data) => {
+//       let newQuotesArray = data.results;
+//       for (i = 0; i < newQuotesArray.length; i++) {
+//         let categories = newQuotesArray[i].tags[i];
+//         let next = document.createElement("option");
+//         next.textContent = categories;
+//         next.value = categories;
+//         selectedCategory.appendChild(next);
+//       }
+
+//let categoryArray = newQuotesArray[i].tags;
+//     });
+// }
+
+function getQuoteFromCategory() {
+  fetch("https://api.quotable.io/quotes?page=103")
     .then((res) => res.json())
     .then((data) => {
       let newQuotesArray = data.results;
-      for (i = 0; i < newQuotesArray.length; i++) {
-        let categories = newQuotesArray[i].tags[i];
-        let next = document.createElement("option");
-        next.textContent = categories;
-        next.value = categories;
-        selectedCategory.appendChild(next);
+      console.log(newQuotesArray);
+      for (i = 0; i <= data.totalPages; i++) {
+        newQuotesArray.push(...data.results);
       }
-
-      //let categoryArray = newQuotesArray[i].tags;
+      const quotesArray = data.results;
+      let categoryArray = newQuotesArray.filter(
+        (categoryArray) => categoryArray.tags[0] === selectedCategory
+      );
+      renderQuote(categoryArray);
     });
-}
-
-function getQuoteFromCategory() {
-  // fetch("https://api.quotable.io/quotes?page=103")
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     let newQuotesArray = data.results;
-  // console.log(newQuotesArray);
-  // for (i = 0; i <= data.totalPages; i++) {
-  //   newQuotesArray.push(...data.results);
-  // }
-  // const quotesArray = data.results;
-  let categoryArray = newQuotesArray.filter(
-    (categoryArray) => categoryArray.tags[0] === selectedCategory
-  );
-  renderQuote(categoryArray);
 }
 
 function getQuote() {
