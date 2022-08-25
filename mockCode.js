@@ -65,57 +65,75 @@
 // or add eventListener so that when the buttons are clicked, the output of the 
 // function is attributed to a variable
 
-// quoteButton.addEventListener("click",function(){
-//     getQuote() = getQuoteOutput;
-//     console.log(getQuoteOutput);
-// })
-// quoteButton.addEventListener("click",function(){
-//     const getQuoteOutput= getQuote();
-//      console.log(getQuoteOutput);
-//    })
+quoteButton.addEventListener("click",function(){
+    getQuote() = getQuoteOutput;
+    console.log(getQuoteOutput);
+})
+quoteButton.addEventListener("click",function(){
+    const getQuoteOutput= getQuote();
+     console.log(getQuoteOutput);
+   })
    
 
+//
 
-
-// function getQuote(){
-//   try {
-//     fetch("https://api.quotable.io/quotes?page=103")
-//     .then(res => res.json())
-//     .then(data => {
-//       let newQuotesArray = []
-//       for (i = 0; i <= data.totalPages; i++) {
-//         newQuotesArray.push(...data.results)
-//       }
-//       return newQuotesArray
-//     })
-//     } catch (error) {
-//       console.log(error);
-//   }
-// }
-
-const baseUrl = "https://api.quotable.io/quotes"
-
-async function getIndicatorByCountry (){  
-  const query = `${baseUrl}/${country}/indicator/${indicator}?page=${page}&format=json`
-  const response = await axios.get(query)  
-  const data = response.data
-
-  if (data[0].pages > page) {
-    return data.concat(await getIndicatorByCountry(country, indicator, page+1)) 
-  } else {
-    return data
-  }
+function getRandom(){
+    getQuote();
+    getImage();
 }
 
-const quoteURL = "https://api.quotable.io/quotes?limit=150"
 
-async function getQuote(page){
-  const query = `${quoteURL}&page=${page}`
-  const response = await fetch(query)
-  const data = response.json()
-  console.log(data)
-  //gets stuck here, can't figure out how to access values in returned promise
-  newQuotesArray.push(...data.results)
+
+{/* <div class='favorites'>
+      <div class="col-sm-6">
+        <div class="card bg-dark text-white">
+            <img src="bao-bun.jpg" class="card-img" alt="...">
+                <div class="card-img-overlay">
+                    <p class="quote-text">Let's get poppin.</p>
+                    <p class="author">-Jawann Brady</p>
+                </div>
+        </div>
+      </div> 
+    </div> */}
+
+
+<<<<<<< HEAD
+const quoteURL = "https://api.quotable.io/quotes?limit=150"
+=======
+// HISTORY FEATURE:
+function addImageToHistory(){
+  history.createElement('img');
+  history.img.setAttribute('src',imagehistory.length);
+};
+
+function addQuoteToHistory(){
+  history.createElement('p');
+  history.p.setAttribute('class','quote-text-inHistory');
+  history.p.innerHTML = quoteHistory.quote+author; // would this substitute lines 112-114?
+  // same thing but adding the author to the quote//
+  history.createElement('p');
+  let pOfAuthor = history.p.setAttribute('class','author-text-inHistory');
+  history.pOfAuthor.innerHTML = quoteHistory.author;
+
+// //optimize getQuote and getImage functions, possibly split into two functions,
+//one to fetch/render the data into an array and one to get it into the function
+// function getData(){
+//     try {
+//       fetch("https://api.quotable.io/quotes")
+//       .then(res => res.json())
+//       .then(data => {
+//         return data;
+//       });
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+// function renderQuote(){
+
+// }
+
+    
 
   if(data.totalPages > page){
     await getQuote(page+1)
