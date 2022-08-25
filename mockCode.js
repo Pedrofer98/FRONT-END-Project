@@ -101,7 +101,7 @@ function getRandom(){
 // HISTORY FEATURE:
 function addImageToHistory(){
   history.createElement('img');
-  history.img.setAttribute('src',imagehistory.length);
+  history.img.setAttribute('src',imagehistory[imagehistory.length-1]);// .length does not return last item.
 };
 
 function addQuoteToHistory(){
@@ -112,9 +112,8 @@ function addQuoteToHistory(){
   history.createElement('p');
   let pOfAuthor = history.p.setAttribute('class','author-text-inHistory');
   history.pOfAuthor.innerHTML = quoteHistory.author;
-
-
 }
+
 
     
 

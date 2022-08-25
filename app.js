@@ -8,6 +8,7 @@ const quoteButton = document.querySelector("#quoteButton");
 let actualQuote = quote.innerHTML;
 let quoteHistory =[];
 let imagehistory =[];
+const history = document.querySelector("#history");
 // variables to access dataArray
 
 
@@ -114,5 +115,19 @@ function getRandom(){
   console.log(imagehistory);
 }
 
+function addImageToHistory(){
+  history.createElement('img');
+  history.img.setAttribute('src',imagehistory[imagehistory.length-1]);// .length does not return last item.
+};
+
+function addQuoteToHistory(){
+  history.createElement('p');
+  history.p.setAttribute('class','quote-text-inHistory');
+  history.p.innerHTML = quoteHistory.quote+author; // would this substitute lines 112-114?
+  // same thing but adding the author to the quote//
+  history.createElement('p');
+  let pOfAuthor = history.p.setAttribute('class','author-text-inHistory');
+  history.pOfAuthor.innerHTML = quoteHistory.author;
+}
 
 
