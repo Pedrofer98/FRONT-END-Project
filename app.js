@@ -9,6 +9,8 @@ let quoteHistory = [];
 let newQuotesArray = [];
 let imagesArray = [];
 let imagehistory =[];
+const randomNumber = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+let counter = 0;
 
 //EVENT LISTENERS
 window.addEventListener("load", getQuote);
@@ -18,18 +20,15 @@ imageButton.addEventListener("click",renderImage);
 quoteButton.addEventListener('click', renderQuote)
 
 
-
 //FUNCTIONS
 function getQuote(){
+  let quoteURL = `https://api.quotable.io/quotes?limit=100&page=${randomNumber(1, 14)}`
   try {
-    fetch("https://api.quotable.io/quotes")
+    fetch(quoteURL)
     .then(res => res.json())
     .then(data => {
-      //pagination isn't fixed, i thought it was w/ this but it's not, 
-      //it's just pushing the same initial set over and over
-      for (i = 0; i <= data.totalPages; i++) {
-        newQuotesArray.push(...data.results)
-      }
+      console.log(data)
+      newQuotesArray.push(...data.results)
     })
   }catch (error) {
       console.log(error);
@@ -37,6 +36,14 @@ function getQuote(){
 }
 
 function renderQuote (){
+    if (counter === 99){
+      newQuotesArray = [];
+      imagesArray = [];
+      getQuote();
+      getImage();
+      counter = 0;
+    }
+    counter += 1;
     let actualQuote = quote.innerHTML;
     let randomNumber = Math.floor(Math.random()*newQuotesArray.length)
     let randomQuote = newQuotesArray[randomNumber].content;
@@ -46,21 +53,19 @@ function renderQuote (){
     quoteHistory.push({author: randomAuthor, quote: randomQuote});
   }
 
-
-
 //still need to fix pagination
 function getImage(){
   try {
       fetch(`https://picsum.photos/v2/list?limit=100`)
       .then(res => res.json())
       .then(data => {
+        //run recursion just like in getquote up to a static #
         imagesArray.push(...data);
     }) 
   }catch (error) {
       console.log(error);
   }
 }
-
 
 function renderImage(){
   let randomNumber = Math.floor(Math.random()*imagesArray.length)
@@ -70,7 +75,15 @@ function renderImage(){
 }
 
 function getRandom(){
-  renderQuote();
+  if (counter === 99){
+    newQuotesArray = [];
+    imagesArray = [];
+    getQuote();
+    getImage();
+    counter = 0;
+  }
+  counter += 1;
   renderImage();
+  renderQuote();
 }
 
