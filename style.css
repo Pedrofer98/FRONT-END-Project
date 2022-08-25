@@ -10,8 +10,8 @@
     padding: 20px;
 }
 
-.col-2{
-    background: green;
+.btn-dark{
+    column-count: 3;
     
 }
 .form-select{
