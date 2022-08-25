@@ -58,7 +58,23 @@
 // }
 
 //HISTORY FEATURE
-// function history(quoteGenerated, authorGenerated,imageGenerated){
+
+function addImageToHistory(){
+  history.createElement('img');
+  history.img.setAttribute('src',imagehistory.length);
+};
+
+function addQuoteToHistory(){
+  history.createElement('p');
+  history.p.setAttribute('class','quote-text-inHistory');
+  history.p.innerHTML = quoteHistory.quote+author; // would this substitute lines 112-114?
+  // same thing but adding the author to the quote//
+  history.createElement('p');
+  let pOfAuthor = history.p.setAttribute('class','author-text-inHistory');
+  history.pOfAuthor.innerHTML = quoteHistory.author; 
+
+
+  //function history(quoteGenerated, authorGenerated,imageGenerated){
 // }
 
 // const getQuoteOutput = $(getQuote);
@@ -97,9 +113,9 @@ function getRandom(){
     </div> */}
 
 
-<<<<<<< HEAD
+
 const quoteURL = "https://api.quotable.io/quotes?limit=150"
-=======
+
 // HISTORY FEATURE:
 function addImageToHistory(){
   history.createElement('img');
