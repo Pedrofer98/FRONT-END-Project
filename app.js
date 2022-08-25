@@ -23,7 +23,7 @@ quoteButton.addEventListener("click", getQuote);
 if (dropdown)
   dropdown.addEventListener("change", function (event) {
     selectedCategory = event.target.value;
-    fillDropdown();
+    //fillDropdown();
     getQuoteFromCategory();
   });
 
@@ -48,15 +48,14 @@ if (dropdown)
 // }
 
 function getQuoteFromCategory() {
-  fetch("https://api.quotable.io/quotes?page=103")
+  fetch("https://api.quotable.io/quotes")
     .then((res) => res.json())
     .then((data) => {
       let newQuotesArray = data.results;
       console.log(newQuotesArray);
-      for (i = 0; i <= data.totalPages; i++) {
-        newQuotesArray.push(...data.results);
-      }
-      const quotesArray = data.results;
+      // for (i = 0; i <= data.totalPages; i++) {
+      //   newQuotesArray.push(...data.results);
+      // }
       let categoryArray = newQuotesArray.filter(
         (categoryArray) => categoryArray.tags[0] === selectedCategory
       );
