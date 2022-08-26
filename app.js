@@ -9,7 +9,9 @@ let quoteHistory = [];
 let newQuotesArray = [];
 let imagesArray = [];
 let imagehistory =[];
-const history = document.querySelector("#history");
+const imgHist= document.querySelector(".card-img-history");
+const quoteHist = document.querySelector(".quote-text-history");
+const authorHist = document.querySelector(".author-history");
 // variables to access dataArray
 
 
@@ -23,6 +25,7 @@ window.addEventListener("load", getImage);
 randomButton.addEventListener("click",getRandom);
 imageButton.addEventListener("click",renderImage);
 quoteButton.addEventListener('click', renderQuote)
+
 
 
 //FUNCTIONS
@@ -56,6 +59,7 @@ function renderQuote (){
     quote.innerHTML = `"${randomQuote}"`
     author.innerHTML = `~${randomAuthor}`
     quoteHistory.push({author: randomAuthor, quote: randomQuote});
+    addQuoteToHistory();
   }
 
 //still need to fix pagination
@@ -77,6 +81,8 @@ function renderImage(){
   let randomImage = imagesArray[randomNumber].download_url;
   image.setAttribute("src",`${randomImage}`);
   imagehistory.push(randomImage);
+  addImageToHistory();
+
 }
 
 function getRandom(){
@@ -92,19 +98,6 @@ function getRandom(){
   renderQuote();
 }
 
-function addImageToHistory(){
-  history.createElement('img');
-  history.img.setAttribute('src',imagehistory[imagehistory.length-1]);// .length does not return last item.
-};
 
-function addQuoteToHistory(){
-  history.createElement('p');
-  history.p.setAttribute('class','quote-text-inHistory');
-  history.p.innerHTML = quoteHistory.quote+author; // would this substitute lines 112-114?
-  // same thing but adding the author to the quote//
-  history.createElement('p');
-  let pOfAuthor = history.p.setAttribute('class','author-text-inHistory');
-  history.pOfAuthor.innerHTML = quoteHistory.author;
-}
 
 
