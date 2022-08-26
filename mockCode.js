@@ -150,6 +150,10 @@ function addQuoteToHistory(){
 // }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2564ef4d67afd0aad925db5cf4e394f70b935f20
 // HISTORY FEATURE:
 function addImageToHistory(){
   history.createElement('img');
@@ -167,8 +171,11 @@ function addQuoteToHistory(){
 }
 
 
+<<<<<<< HEAD
 =======
 >>>>>>> main
+=======
+>>>>>>> 2564ef4d67afd0aad925db5cf4e394f70b935f20
     
 
   if(data.totalPages > page){

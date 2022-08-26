@@ -9,15 +9,27 @@ let quoteHistory = [];
 let newQuotesArray = [];
 let imagesArray = [];
 let imagehistory =[];
+<<<<<<< HEAD
 const imgHist= document.querySelector(".card-img-history");
 const quoteHist = document.querySelector(".quote-text-history");
 const authorHist = document.querySelector(".author-history");
+=======
+
+const history = document.querySelector("#history");
+>>>>>>> 2564ef4d67afd0aad925db5cf4e394f70b935f20
 // variables to access dataArray
 
 
 
+<<<<<<< HEAD
 const randomNumber = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 let counter = 0;
+=======
+
+const randomNumber = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+let counter = 0;
+
+>>>>>>> 2564ef4d67afd0aad925db5cf4e394f70b935f20
 
 //EVENT LISTENERS
 window.addEventListener("load", getQuote);
@@ -98,6 +110,25 @@ function getRandom(){
   renderQuote();
 }
 
+<<<<<<< HEAD
 
 
 
+=======
+
+function addImageToHistory(){
+  history.createElement('img');
+  history.img.setAttribute('src',imagehistory[imagehistory.length-1]);// .length does not return last item.
+};
+
+function addQuoteToHistory(){
+  history.createElement('p');
+  history.p.setAttribute('class','quote-text-inHistory');
+  history.p.innerHTML = quoteHistory.quote+author; // would this substitute lines 112-114?
+  // same thing but adding the author to the quote//
+  history.createElement('p');
+  let pOfAuthor = history.p.setAttribute('class','author-text-inHistory');
+  history.pOfAuthor.innerHTML = quoteHistory.author;
+}
+
+>>>>>>> 2564ef4d67afd0aad925db5cf4e394f70b935f20
