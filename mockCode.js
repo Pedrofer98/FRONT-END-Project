@@ -186,7 +186,4 @@ function getQuote(){
   }catch (error) {
       console.log(error);
   }
-}
-
-
-
+}}

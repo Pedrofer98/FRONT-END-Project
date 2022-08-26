@@ -7,6 +7,10 @@ let dropdown = document.querySelector("select");
 let selectedCategory = null;
 const imageButton = document.querySelector("#imageButton");
 const quoteButton = document.querySelector("#quoteButton");
+const imageInHistory = document.querySelector(".card-img-Hist");
+const quoteInHistory = document.querySelector(".quote-text-history");
+const authorInHistory = document.querySelectorAll(".author-History");
+const historyDeckToAppend = document.querySelector("#history-deck");
 
 
 let actualQuote = quote.innerHTML;
@@ -106,6 +110,9 @@ function renderImage(){
   let randomImage = imagesArray[randomNumber].download_url;
   image.setAttribute("src",`${randomImage}`);
   imagehistory.push(randomImage);
+  fucntion() {
+    historyDeckToAppend.appendChild("img","src='${randomImg}");
+  }
 }
 
 
