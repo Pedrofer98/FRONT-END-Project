@@ -10,6 +10,23 @@
 //     }
 //   }
 
+//kelly changes
+// function fillDropdown() {
+//   fetch("https://api.quotable.io/quotes")
+//     .then((res) => res.json())
+//     .then((data) => {
+//       let newQuotesArray = data.results;
+//       for (i = 0; i < newQuotesArray.length; i++) {
+//         let categories = newQuotesArray[i].tags[i];
+//         let next = document.createElement("option");
+//         next.textContent = categories;
+//         next.value = categories;
+//         selectedCategory.appendChild(next);
+//       }
+
+//let categoryArray = newQuotesArray[i].tags;
+//     });
+// }
 
 //WORKING GETQUOTE FUNCTION, PRIOR TO FIXING PAGINATION
 //   function getQuote(){
@@ -170,3 +187,6 @@ function getQuote(){
       console.log(error);
   }
 }
+
+
+
