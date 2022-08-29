@@ -5,6 +5,37 @@
 //merge pedro's code
 
 
+// function renderHistory (randomImage,){
+//   historyDeckToAppend.appendChild(`
+//        <div class="col-4">
+//           <div class="card bg-dark text-white">
+//               <img src="${randomImage}" class="card-img-Hist1" alt="...">
+//                   <div class="card-img-overlay">
+//                       <p class="quote-text-history1">${randomQuote}</p>
+//                       <p class="author-History1">-${randomAuthor}</p>
+//                   </div>
+//           </div>
+//       </div>`)
+// }
+
+
+
+  // imageInHistory.setAttribute("src",`${randomImage}`);//alternative 1. issue:
+  // we need to din. create the HTML elements and have their src's set to the randomImg.
+
+// option 2
+  // historyDeckToAppend.appendChild(`
+  //      <div class="col-4">
+  //         <div class="card bg-dark text-white">
+  //             <img src="${randomImage}" class="card-img-Hist1" alt="...">
+  //                  <div class="card-img-overlay">
+  //                      <p class="quote-text-history1">${quote.innerHTML}</p>
+  //                      <p class="author-History1">-${author.innerHTML}</p>
+  //                 </div>
+  //          </div>
+  //      </div>`)
+
+
 
 
 //VARIABLES
