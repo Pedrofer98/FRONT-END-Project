@@ -9,7 +9,7 @@ body {
 .container{
     background-color: transparent;
     width: fit-content;
-    align-content: center;
+    height: fit-content;
     padding: 10px;
 }
 
@@ -18,7 +18,7 @@ body {
 
 }
 
-.column{
+.col-4{
   justify-content: stretch;
 }
 
