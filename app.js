@@ -32,7 +32,17 @@ dropdown.addEventListener("change", function (event) {
     getQuoteFromCategory();
   });
 
+
 //FUNCTIONS
+function onLoad(){
+  Promise.all([getImage(), getQuote()])
+    .then(() => {
+      initialRenderImage();
+      initialRenderQuote();
+      renderHistory();
+    });
+}
+
 function fillDropdown() {
     if (counter ===99){
         reset();
@@ -68,6 +78,13 @@ async function getQuote(){
   }
 }
 
+function initialRenderQuote(){
+  let randomNumber = Math.floor(Math.random()*newQuotesArray.length)
+  let randomQuote = newQuotesArray[randomNumber].content;
+  let randomAuthor = newQuotesArray[randomNumber].author;
+  quote.innerHTML = `"${randomQuote}"`
+  author.innerHTML = `~${randomAuthor}`
+}
 
 function renderQuote (){
     if (counter === 99){
@@ -87,14 +104,17 @@ async function getImage(){
   try {
       let data = await fetch(`https://picsum.photos/v2/list?limit=100`) ;
       let data2 = await data.json();
-      // debugger;
       imagesArray.push(...data2);
-      //.then(renderImage)
   }catch (error) {
       console.log(error);
   }
 }
 
+function initialRenderImage(){
+  let randomNumber = Math.floor(Math.random()*imagesArray.length)
+  let randomImage = imagesArray[randomNumber].download_url;
+  image.setAttribute("src",`${randomImage}`);
+}
 
 function renderImage(){
   if (counter === 99){
@@ -113,8 +133,9 @@ function getRandom(){
     reset();
   }
   counter += 1;
-  renderImage();
-  renderQuote();
+  initialRenderImage();
+  initialRenderQuote();
+  renderHistory();
 }
 
 
@@ -130,14 +151,6 @@ function renderHistory(){
                   </div>
           </div>`;
     historyDeckToAppend.appendChild(historyItem);
-}
-
-function onLoad(){
-  Promise.all([getImage(), getQuote()])
-    .then(() => {
-      renderImage();
-      renderQuote();
-    });
 }
 
 
