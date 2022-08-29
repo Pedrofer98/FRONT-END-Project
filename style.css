@@ -13,8 +13,9 @@ body {
     padding: 10px;
 }
 
-.card-body{
+.card{
   justify-content: center;
+  margin:10px;
 
 }
 
@@ -27,9 +28,8 @@ body {
 }
 
 .dropdown{
-  height: 10%;
-  padding-left: 200px;
-  padding-right: 0px;
+  height: 30%;
+  margin: auto;
   flex-direction: center;
 }
 
