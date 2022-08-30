@@ -13,40 +13,42 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow justify-content-center">
         <a class="navbar-brand" href="#">Random Quote Generator</a></nav>
 <body>
-    <div class="container">
-        <div class="card border-0 shadow my-6">
+    <div class="container border-0 shadow my-6">
+        <div class="card border-0 shadow my-6 p-5">
             <div class="card-body p-5">
                 <form class="column text-center">
                     <button type="button" id="quoteButton" class="btn btn-dark">New Quote</button>
                     <button type="button" id="randomButton" class="btn btn-dark">*Random*</button>
                     <button type="button" id="imageButton" class="btn btn-dark">New Image</button>  
-                    <button type="button" id="dropdownButton" class="btn btn-dark">Scramble Categories</button>  
 
                     <div class="dropdown col-4 text-center">
                         <select class="form-select" id="categorySelection" label="Pick One">
-                            <option>Pick an Option</option> -->
-                            <option value="business">Business</option>
+                            <option>Pick an Option</option> 
+
                         </select>
                     </div>
                 </form>    
-                    <div class="row justify-content-center">
-                        <div class="col-sm-6">
-                            <div class="card bg-dark text-white ">
-                                <img class="card-img" alt="...">
-                                    <div class="card-img-overlay">
-                                        <p class="quote-text"></p>
-                                        <p class="author"></p>
-                                    </div>
-                            </div>
+                <div class="row justify-content-center">
+                    <div class="col-sm-6 w-75">
+                        <div class="card bg-dark text-white ">
+                            <img class="card-img" alt="...">
+                                <div class="card-img-overlay">
+                                    <p class="quote-text"></p>
+                                    <p class="author"></p>
+                                </div>
                         </div>
                     </div>
-                    <div class="container-fluid"> 
-                        <div class="row justify-content-center">
-                            <div class="card-deck row" id="history-deck">
-                                
-                            </div>
-                        </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card border-0 shadow my-6">
+            <div class="card-body p-5">
+                <div class="container-fluid"> 
+                    <div class="card-deck row justify-content-center" id="history-deck">
+                    <!-- HISTORY CARDS GO HERE -->
                     </div>
+                </div>
             </div>
         </div>
     </div>
