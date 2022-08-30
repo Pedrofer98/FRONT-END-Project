@@ -8,21 +8,29 @@ body {
 
 .container{
     background-color: transparent;
-    align-content: center;
-    padding: 20px;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
 }
 
-.card-border{
+.card{
   justify-content: center;
+  margin:10px;
 
 }
 
-.column{
+.col-4{
   justify-content: stretch;
 }
 
 .column.text-center{
   justify-content: end;
+}
+
+.dropdown{
+  height: 30%;
+  margin: auto;
+  flex-direction: center;
 }
 
 
@@ -72,10 +80,3 @@ body {
     background: #CB2027;
     color: white;
   }
-left: 51%;
-transform: translateX(-51%);
-  #dropdown{}
-.dropdown{
-  width: 10%;
-  text-align: center;
-}
