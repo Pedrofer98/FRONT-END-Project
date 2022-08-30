@@ -5,7 +5,6 @@ const author = document.querySelector(".author");
 const image = document.querySelector(".card-img");
 let dropdown = document.querySelector("select");
 let select = document.getElementById("categorySelection")
-let selectedCategory = null;
 const imageButton = document.querySelector("#imageButton");
 const quoteButton = document.querySelector("#quoteButton");
 const dropdownButton = document.querySelector("#dropdownButton");
@@ -13,23 +12,16 @@ const imageInHistory = document.querySelector(".card-img-Hist1");
 const quoteInHistory = document.querySelector(".quote-text-history1");
 const authorInHistory = document.querySelectorAll(".author-History1");
 const historyDeckToAppend = document.getElementById("history-deck");
-
-
+const randomPage = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+let selectedCategory = null;
 let newQuotesArray = [];
 let imagesArray = [];
 let tagArray = [];
+let counter = 95;
 
-const randomPage = (min, max) => Math.floor(Math.random() * (max - min)) + min;
-let counter = 0;
-
-// select.innerHTML ="";
 
 //EVENT LISTENERS
 window.addEventListener("load", onLoad);
-//single event handler for load function, then call image, then call quote
-
-
-//window.addEventListener("load", fillDropdown)
 randomButton.addEventListener("click",getRandom);
 imageButton.addEventListener("click",renderImage);
 quoteButton.addEventListener('click', renderQuote)
@@ -40,23 +32,29 @@ dropdown.addEventListener("change", function (event) {
     getQuoteFromCategory();
   });
 
+
 //FUNCTIONS
+function onLoad(){
+  Promise.all([getImage(), getQuote()])
+    .then(() => {
+      initialRenderImage();
+      initialRenderQuote();
+      renderHistory();
+    });
+}
+
 function fillDropdown() {
-      if (counter ===99){
-      newQuotesArray = [];
-      imagesArray = [];
-      getQuote();
-      getImage();
-      counter = 0;
+    if (counter ===99){
+        reset();
     }
     counter += 1;
     //console.log(newQuotesArray.tags)
     newQuotesArray.map(
-     (quote) => tagArray.push(...quote.tags)
+      (quote) => tagArray.push(...quote.tags)
     )
    let noDuplicates = tagArray.filter((c, index) => {
-    return tagArray.indexOf(c)
-    === index;   })
+      return tagArray.indexOf(c) === index;   
+    })
     console.log(noDuplicates)
     for(i=0; i<noDuplicates.length; i++) {
       let option = document.createElement("option"),
@@ -64,12 +62,9 @@ function fillDropdown() {
       option.appendChild(text);
       option.setAttribute("value", noDuplicates[i]);
       select.insertBefore(option, select.lastChild);
-
     }
   }
    
-
-
 
 async function getQuote(){
   let quoteURL = `https://api.quotable.io/quotes?limit=100&page=${randomPage(1, 14)}`
@@ -83,14 +78,17 @@ async function getQuote(){
   }
 }
 
+function initialRenderQuote(){
+  let randomNumber = Math.floor(Math.random()*newQuotesArray.length)
+  let randomQuote = newQuotesArray[randomNumber].content;
+  let randomAuthor = newQuotesArray[randomNumber].author;
+  quote.innerHTML = `"${randomQuote}"`
+  author.innerHTML = `~${randomAuthor}`
+}
 
 function renderQuote (){
     if (counter === 99){
-      newQuotesArray = [];
-      imagesArray = [];
-      getQuote();
-      getImage();
-      counter = 0;
+      reset();
     }
     counter += 1;
     let randomNumber = Math.floor(Math.random()*newQuotesArray.length)
@@ -98,20 +96,7 @@ function renderQuote (){
     let randomAuthor = newQuotesArray[randomNumber].author;
     quote.innerHTML = `"${randomQuote}"`
     author.innerHTML = `~${randomAuthor}`
-    // renderHistory(image,randomQuote,randomAuthor)
-    
-    let historyItem = document.createElement('div');
-    historyItem.classList.add("col-4");
-    historyItem.innerHTML = 
-        `<div class="card bg-dark text-white">
-        <img src="${image.src}" class="card-img" alt="..."> 
-                  <div class="card-img-overlay">
-                      <p class="quote-text-history1">${randomQuote}</p>
-                      <p class="author-History1">-${randomAuthor}</p>
-                  </div>
-          </div>`;
-    historyDeckToAppend.appendChild(historyItem);
-    console.log(image.download_url);
+    renderHistory();
     }
 
 
@@ -119,98 +104,60 @@ async function getImage(){
   try {
       let data = await fetch(`https://picsum.photos/v2/list?limit=100`) ;
       let data2 = await data.json();
-      // debugger;
       imagesArray.push(...data2);
-      //.then(renderImage)
   }catch (error) {
       console.log(error);
   }
 }
 
+function initialRenderImage(){
+  let randomNumber = Math.floor(Math.random()*imagesArray.length)
+  let randomImage = imagesArray[randomNumber].download_url;
+  image.setAttribute("src",`${randomImage}`);
+}
 
 function renderImage(){
   if (counter === 99){
-    newQuotesArray = [];
-    imagesArray = [];
-    getQuote();
-    getImage();
-    counter = 0;
+    reset();
   }
   counter += 1;
   let randomNumber = Math.floor(Math.random()*imagesArray.length)
   let randomImage = imagesArray[randomNumber].download_url;
   image.setAttribute("src",`${randomImage}`);
-  // renderHistory(randomImage)
+  renderHistory();
 }
-  
-
-  // imageInHistory.setAttribute("src",`${randomImage}`);//alternative 1. issue:
-  // we need to din. create the HTML elements and have their src's set to the randomImg.
-
-// option 2
-  // historyDeckToAppend.appendChild(`
-  //      <div class="col-4">
-  //         <div class="card bg-dark text-white">
-  //             <img src="${randomImage}" class="card-img-Hist1" alt="...">
-  //                  <div class="card-img-overlay">
-  //                      <p class="quote-text-history1">${quote.innerHTML}</p>
-  //                      <p class="author-History1">-${author.innerHTML}</p>
-  //                 </div>
-  //          </div>
-  //      </div>`)
  
 
 function getRandom(){
   if (counter === 99){
+    reset();
+  }
+  counter += 1;
+  initialRenderImage();
+  initialRenderQuote();
+  renderHistory();
+}
+
+
+function renderHistory(){
+  let historyItem = document.createElement('div');
+    historyItem.classList.add("col-4");
+    historyItem.innerHTML = 
+        `<div class="card bg-dark text-white">
+        <img src="${image.src}" class="card-img" alt="..."> 
+                  <div class="card-img-overlay">
+                      <p class="quote-text-history1">${quote.innerHTML}</p>
+                      <p class="author-History1">~${author.innerHTML}</p>
+                  </div>
+          </div>`;
+    historyDeckToAppend.appendChild(historyItem);
+}
+
+
+function reset (){
     newQuotesArray = [];
     imagesArray = [];
     getQuote();
     getImage();
     counter = 0;
-  }
-  counter += 1;
-  renderImage();
-  renderQuote();
-}
-
-
-// function renderHistory (randomImage,){
-//   historyDeckToAppend.appendChild(`
-//        <div class="col-4">
-//           <div class="card bg-dark text-white">
-//               <img src="${randomImage}" class="card-img-Hist1" alt="...">
-//                   <div class="card-img-overlay">
-//                       <p class="quote-text-history1">${randomQuote}</p>
-//                       <p class="author-History1">-${randomAuthor}</p>
-//                   </div>
-//           </div>
-//       </div>`)
-// }
-
-function renderHistory(param1,param2,param3){
-  let historyItem = document.createElement('div');
-  historyItem.classList.add("col-4");
-  historyItem.innerHTML = 
-      `<div class="card bg-dark text-white">
-            <img src="${param1}" class="card-img-Hist1" alt="...">
-                <div class="card-img-overlay">
-                    <p class="quote-text-history1">${param2}</p>
-                    <p class="author-History1">-${param3}</p>
-                </div>
-        </div>`;
-  historyDeckToAppend.appendChild(historyItem);
-}
-
-function onLoad(){
-  Promise.all([getImage(), getQuote()])
-    .then(() => {
-      renderImage();
-      renderQuote();
-    });
-}
-
-
-
-function loadData(){
-  
 }
