@@ -4,37 +4,40 @@ body {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
+  padding:20px;
 }
-
-.container{
+.container-fluid{
     background-color: transparent;
     width: fit-content;
     height: fit-content;
-    padding: 10px;
+    font-family:'Gill Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;
+    font-style:italic;
+    font-size:1vw;
 }
-
-.card{
+.card-deck {
+  justify-content: center;
+  padding:20px;
+  font-size:1vw;
+}
+.card-body{
   justify-content: center;
   margin:10px;
-
+  font-family:'Gill Sans', 'Gill Sans MT','Trebuchet MS', sans-serif;
+  font-style:italic;
+  font-size: 2vw;
+  text-shadow:-1px -1px black;
 }
-
 .col-4{
   justify-content: stretch;
 }
-
 .column.text-center{
-  justify-content: end;
+  justify-content:center;
 }
-
 .dropdown{
   height: 30%;
   margin: auto;
   flex-direction: center;
 }
-
-
-
 .footer{
   display: flex;
   justify-content: center;
@@ -79,4 +82,3 @@ body {
   .fa-pinterest {
     background: #CB2027;
     color: white;
-  }
